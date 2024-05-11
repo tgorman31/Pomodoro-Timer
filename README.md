@@ -14,6 +14,7 @@ A TUI based pomodoro timer written in Go with Bubbletea
 
 ## How I plan on working on this Project
 My goal is to simulate a professional work environment and learn stuff along the way
-  - I plan to manage tasks on a Kanban board
+  - I managed tasks on a Kanban board [example](https://github.com/tgorman31/Pomodoro-Timer/assets/47192981/799adce9-f03e-4bc1-bed7-60766fcf50a0)
+
   - I plan to use feature branches and Pull Requests
 
