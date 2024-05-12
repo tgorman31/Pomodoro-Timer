@@ -1,12 +1,12 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
-	"os"
 	"strconv"
 	"strings"
 	"time"
+
+	in "github.com/tgorman31/Go-Modules/input"
 )
 
 func Hello() string {
@@ -23,24 +23,7 @@ func Timer(name string, min int, sec int) {
 	fmt.Printf("%s timer completed \n", name)
 }
 
-func User_Input(msg string) (out string) {
-	fmt.Println(msg)
-
-	reader := bufio.NewReader(os.Stdin)
-
-	out, err := reader.ReadString('\n')
-
-	if err != nil {
-		fmt.Printf("Error reading input: %e", err)
-	}
-
-	out = strings.TrimSpace(out)
-
-	return out
-}
-
 func Time_Parse(time string) (min int, sec int) {
-	// var t []string
 
 	t := strings.Split(time, ":")
 
@@ -52,8 +35,9 @@ func Time_Parse(time string) (min int, sec int) {
 
 func main() {
 	fmt.Println(Hello())
-	wrk := User_Input("Please enter a work time as such ##:##")
-	brk := User_Input("Please enter a break time as such ##:##")
+
+	wrk := in.User_Input("Please enter a work time as such ##:##")
+	brk := in.User_Input("Please enter a break time as such ##:##")
 
 	wMin, wSec := Time_Parse(wrk)
 	bMin, bSec := Time_Parse(brk)
