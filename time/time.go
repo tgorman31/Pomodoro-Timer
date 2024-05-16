@@ -94,12 +94,14 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		var cmd tea.Cmd
 		m.timer, cmd = m.timer.Update(msg)
 		return m, cmd
+
 	case tmr.StartStopMsg:
 		var cmd tea.Cmd
 		m.timer, cmd = m.timer.Update(msg)
 		m.keymap.stop.SetEnabled(m.timer.Running())
 		m.keymap.start.SetEnabled(!m.timer.Running())
 		return m, cmd
+
 	case tmr.TimeoutMsg:
 		m.quitting = true
 		return m, tea.Quit
@@ -120,16 +122,20 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 }
 
 func (m model) View() string {
+	var s string
 	t := m.timer.Timeout
 
-	s := "Time remaining " + time.Duration.String(t)
+	// s := m.timer.View()
 
 	if m.timer.Timedout() {
 		s = "All done!"
 	}
 	s += "\n"
 	if !m.quitting {
-		s = "Exiting in " + s
+		s = "Time remaining " + time.Duration.String(t)
+		s += "\n"
+		s += "s - start/stop; r - reset; q - quit"
+		// s = "Exiting in " + s
 		// s += m.helpView()
 	}
 	return s
@@ -137,7 +143,7 @@ func (m model) View() string {
 
 func Launch_Timer() {
 	m := model{
-		timer: tmr.NewWithInterval(timeout, time.Millisecond),
+		timer: tmr.New(timeout),
 		keymap: keymap{
 			start: key.NewBinding(
 				key.WithKeys("s"),
